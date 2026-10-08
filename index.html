@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>زیارت عاشورا | روش حق‌شناس | صلوات شمار</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- 🔵 اسکریپت مینی‌اپ بله -->
+<script src="https://tapi.bale.ai/miniapp.js"></script>
+
+<style>
+  html {
+    --bg-1: #f8f4ea; --bg-2: #ede0c6;
+    --glow: rgba(184,134,11,0.10);
+    --card-bg: rgba(255,255,255,0.78);
+    --card-border: rgba(184,134,11,0.28);
+    --prayer-bg: rgba(255,255,255,0.62);
+    --text: #2b2620; --text-soft: #6b6154;
+    --gold: #a8791a; --gold-2: #d4af37;
+    --accent: #0e6b50;
+    --shadow: 0 12px 34px rgba(120,90,20,0.13);
+    --scroll-track: rgba(0,0,0,0.07);
+    --ring-glow: rgba(212,175,55,0.28);
+    --green: #1f9d6b;
+    --green-soft: rgba(31,157,107,0.12);
+    --red-soft: rgba(214,48,49,0.10);
+    --modal-bg: rgba(255,255,255,0.96);
+    --tg-blue: #229ED9;
+    --text-scale: 1;
+    --mobile-scale: 1;
+    --text-font: 'Amiri', 'Vazirmatn', serif;
+    --text-base: 1.28rem;
+    --text-line: 2.5;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html[data-theme="night"] {
+    --bg-1: #070d12; --bg-2: #10222b;
+    --glow: rgba(232,199,102,0.10);
+    --card-bg: rgba(255,255,255,0.05);
+    --card-border: rgba(232,199,102,0.20);
+    --prayer-bg: rgba(0,0,0,0.30);
+    --text: #ece4d3; --text-soft: #9fb0b6;
+    --gold: #e8c766; --gold-2: #ffd700;
+    --accent: #24c39b;
+    --shadow: 0 12px 34px rgba(0,0,0,0.55);
+    --scroll-track: rgba(255,255,255,0.06);
+    --ring-glow: rgba(255,215,0,0.30);
+    --green: #2ee6a8;
+    --green-soft: rgba(46,230,168,0.10);
+    --red-soft: rgba(214,48,49,0.14);
+    --modal-bg: rgba(20,30,40,0.98);
+  }
+
+  html.sans {
+    --text-font: 'Vazirmatn', Tahoma, sans-serif;
+    --text-base: 1.02rem;
+    --text-line: 2.45;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, var(--glow), transparent 55%),
+      radial-gradient(circle at 85% 100%, var(--glow), transparent 55%),
+      linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    padding: calc(14px + var(--safe-top)) 12px calc(40px + var(--safe-bottom));
+    transition: background .5s ease, color .35s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  header.topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 14px; position: relative;
+  }
+  .brand { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+  .brand .ornament {
+    font-size: 1.5rem; color: var(--gold);
+    filter: drop-shadow(0 0 8px var(--ring-glow)); flex-shrink: 0;
+  }
+  .brand h1 { font-size: 1.12rem; font-weight: 700; color: var(--gold); line-height: 1.3; }
+  .brand span { display: block; font-size: .68rem; font-weight: 400; color: var(--text-soft); margin-top: 2px; }
+
+  .top-actions { display: flex; gap: 8px; position: relative; }
+  .icon-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1.5px solid var(--card-border);
+    background: var(--card-bg); color: var(--gold);
+    font-size: 1.15rem; cursor: pointer;
+    display: grid; place-items: center;
+    transition: transform .25s, box-shadow .25s; font-family: inherit;
+  }
+  .icon-btn:hover { box-shadow: 0 0 16px var(--ring-glow); }
+  .icon-btn:active { transform: scale(.92); }
+  .icon-btn svg { pointer-events: none; }
+
+  .icon-btn.hint-pulse { animation: menuPulse 1.8s ease-in-out infinite; }
+  @keyframes menuPulse {
+    0%,100% { box-shadow: 0 0 0 0 var(--ring-glow); }
+    50% { box-shadow: 0 0 0 10px transparent, 0 0 22px var(--ring-glow); }
+  }
+
+  .menu-hint {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a;
+    font-size: .74rem; font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 11px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+    z-index: 260;
+    max-width: 240px;
+    line-height: 1.6;
+    text-align: right;
+    opacity: 0;
+    transform: translateY(-6px) scale(.95);
+    pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease;
+    animation: hintBounce 2s ease-in-out infinite;
+  }
+  .menu-hint.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .menu-hint::before {
+    content: ''; position: absolute; top: -6px; left: 54px;
+    width: 12px; height: 12px;
+    background: var(--gold-2);
+    transform: rotate(45deg); border-radius: 2px;
+  }
+  .menu-hint .close-hint {
+    position: absolute; top: -6px; left: -6px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #17202a; color: var(--gold-2);
+    border: none; font-size: .7rem; font-weight: 700;
+    cursor: pointer; display: grid; place-items: center;
+    line-height: 1; font-family: inherit;
+  }
+  @keyframes hintBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  .menu-panel {
+    position: absolute; top: 52px; left: 0;
+    width: 300px; max-width: calc(100vw - 24px);
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 14px;
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    z-index: 300;
+  }
+  .menu-panel.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .menu-section + .menu-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--card-border); }
+  .menu-label { font-size: .75rem; font-weight: 600; color: var(--gold); margin-bottom: 8px; }
+  .menu-row { display: flex; gap: 6px; align-items: center; }
+
+  .m-btn {
+    flex: 1; font-family: inherit; font-size: .82rem; font-weight: 600;
+    padding: 9px 10px; border-radius: 9px;
+    border: 1px solid var(--card-border);
+    background: transparent; color: var(--text);
+    cursor: pointer; transition: all .18s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .m-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .m-btn.active {
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a; border-color: transparent;
+  }
+  .m-btn.small { flex: 0 0 48px; font-size: .95rem; padding: 9px 0; }
+
+  .credit-box {
+    background: var(--glow); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 13px 12px;
+    text-align: center; line-height: 1.9;
+  }
+  .credit-box .name {
+    color: var(--gold); font-weight: 700; font-size: .95rem;
+    display: block; margin-bottom: 2px;
+  }
+  .credit-box .role {
+    color: var(--text-soft); font-size: .7rem;
+    display: block; margin-bottom: 10px;
+  }
+
+  .contact-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px; width: 100%;
+    font-family: inherit; font-size: .86rem; font-weight: 700;
+    padding: 11px 16px; border-radius: 11px; border: none;
+    background: linear-gradient(135deg, #2AABEE, #229ED9);
+    color: #fff; cursor: pointer;
+    box-shadow: 0 6px 18px rgba(34,158,217,0.35);
+    transition: transform .2s, box-shadow .25s;
+  }
+  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(34,158,217,0.5); }
+  .contact-btn:active { transform: scale(.97); }
+  .contact-btn svg { flex-shrink: 0; }
+
+  .tabs {
+    display: flex; gap: 5px;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 5px; margin-bottom: 14px;
+    backdrop-filter: blur(14px); box-shadow: var(--shadow);
+  }
+  .tab-btn {
+    flex: 1; font-family: inherit; font-size: .84rem; font-weight: 600;
+    padding: 11px 8px; border-radius: 10px; border: none;
+    background: transparent; color: var(--text-soft);
+    cursor: pointer; transition: all .25s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a; box-shadow: 0 6px 16px rgba(212,175,55,0.28);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn .28s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 15px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+  }
+
+  .dedication {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; padding: 4px 4px 14px; margin-bottom: 12px;
+    font-size: .95rem; font-weight: 600; color: var(--gold);
+    text-shadow: 0 0 14px var(--ring-glow);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .dedication::before, .dedication::after {
+    content: ''; flex: 1; max-width: 90px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: .55;
+  }
+  .dedication .heart { color: var(--gold-2); font-size: .85rem; }
+
+  #prayerBox {
+    height: 58vh; min-height: 340px; max-height: 620px;
+    overflow-y: auto; overscroll-behavior: contain;
+    padding: 20px 18px; background: var(--prayer-bg);
+    border-radius: 14px; border: 1px solid var(--card-border);
+    text-align: justify; text-align-last: center;
+    scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+    font-family: var(--text-font);
+    font-size: calc(var(--text-base) * var(--text-scale) * var(--mobile-scale));
+    line-height: var(--text-line);
+  }
+  #prayerBox::-webkit-scrollbar { width: 7px; }
+  #prayerBox::-webkit-scrollbar-track { background: var(--scroll-track); border-radius: 10px; }
+  #prayerBox::-webkit-scrollbar-thumb { background: linear-gradient(var(--gold), var(--gold-2)); border-radius: 10px; }
+
+  #prayerBox p { margin-bottom: 1.3em; }
+  #prayerBox p:last-child { margin-bottom: 0; }
+  #prayerBox p.note {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    font-size: .68em; line-height: 2;
+    font-weight: 600; color: var(--gold);
+    text-align: center; text-align-last: center;
+    background: var(--glow); border-right: 3px solid var(--gold);
+    border-radius: 9px; padding: 9px 13px; margin: 1.6em 0 1.2em;
+  }
+  #prayerBox p.takrar {
+    color: var(--accent); text-align: center; text-align-last: center;
+    border: 1px dashed var(--card-border); border-radius: 11px;
+    padding: 14px 12px; background: var(--glow);
+  }
+  #prayerBox .divider {
+    text-align: center; color: var(--gold);
+    font-size: .85em; letter-spacing: 8px; margin: 1.4em 0; opacity: .75;
+  }
+
+  .progress-track { height: 4px; border-radius: 10px; background: var(--scroll-track); overflow: hidden; margin-top: 12px; }
+  .progress-fill {
+    height: 100%; width: 0%; border-radius: 10px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-2));
+    transition: width .12s linear; box-shadow: 0 0 10px var(--ring-glow);
+  }
+
+  .control-bar {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 12px; padding: 6px;
+    background: var(--prayer-bg); border: 1px solid var(--card-border);
+    border-radius: 14px;
+  }
+  .play-btn {
+    flex: 1 1 auto; min-width: 0; font-family: inherit;
+    font-size: .88rem; font-weight: 700;
+    padding: 11px 14px; border: none; border-radius: 10px;
+    cursor: pointer; color: #17202a;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    box-shadow: 0 4px 14px rgba(212,175,55,0.28);
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all .2s; white-space: nowrap; overflow: hidden;
+  }
+  .play-btn:hover { transform: translateY(-1px); }
+  .play-btn .ico { font-size: .8rem; }
+  .play-btn.running {
+    background: linear-gradient(135deg, #ff6b6b, #d63031); color: #fff;
+    animation: pulseGlow 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%,100% { box-shadow: 0 4px 14px rgba(214,48,49,0.4); }
+    50% { box-shadow: 0 6px 22px rgba(214,48,49,0.7); }
+  }
+
+  .speed-pill {
+    flex: 0 1 190px; display: flex; align-items: center; gap: 7px;
+    padding: 6px 11px; background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: 10px;
+  }
+  .speed-pill .ico { font-size: .95rem; user-select: none; flex-shrink: 0; }
+  .speed-pill input[type="range"] {
+    flex: 1; min-width: 0; -webkit-appearance: none; appearance: none;
+    height: 4px; border-radius: 5px; background: var(--scroll-track);
+    outline: none; cursor: pointer;
+  }
+  .speed-pill input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    box-shadow: 0 0 8px var(--ring-glow); cursor: pointer;
+    border: 2px solid var(--card-bg);
+  }
+  .speed-pill input[type="range"]::-moz-range-thumb {
+    width: 12px; height: 12px; border: 2px solid var(--card-bg);
+    border-radius: 50%; background: var(--gold); cursor: pointer;
+  }
+
+  .jump-btn {
+    flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--card-border); background: transparent;
+    color: var(--text-soft); cursor: pointer;
+    display: grid; place-items: center; transition: all .2s; font-family: inherit;
+  }
+  .jump-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--glow); }
+  .jump-btn:active { transform: scale(.9); }
+  .jump-btn svg { pointer-events: none; }
+
+  .card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding-bottom: 10px; margin-bottom: 12px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .card-title { font-size: .95rem; font-weight: 600; color: var(--gold); }
+  .badge { font-size: .68rem; color: var(--text-soft); }
+
+  .salavat-area { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 26px 10px 14px; }
+  .ring {
+    position: relative; width: 200px; height: 200px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer; user-select: none;
+    background: radial-gradient(circle, var(--glow), transparent 68%);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 0 40px var(--ring-glow), inset 0 0 40px var(--glow);
+    transition: transform .15s ease, box-shadow .3s ease;
+  }
+  .ring::before {
+    content: ''; position: absolute; inset: -10px; border-radius: 50%;
+    border: 1px dashed var(--card-border);
+    animation: spin 26s linear infinite; pointer-events: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ring:hover { box-shadow: 0 0 0 8px var(--glow), 0 0 50px var(--ring-glow), inset 0 0 40px var(--glow); }
+  .ring:active { transform: scale(.95); }
+  .ring .num {
+    font-size: 3.6rem; font-weight: 700; color: var(--gold);
+    font-variant-numeric: tabular-nums; line-height: 1;
+    text-shadow: 0 0 24px var(--ring-glow);
+  }
+  .ring .lbl { font-size: .76rem; color: var(--text-soft); margin-top: 9px; }
+  .ring .inner { display: flex; flex-direction: column; align-items: center; }
+  .pulse { animation: pulse .3s ease; }
+  @keyframes pulse { 45% { transform: scale(1.09); } }
+  .float-plus {
+    position: absolute; top: 26px; right: 50%; transform: translateX(50%);
+    font-size: 1.35rem; font-weight: 700; color: var(--accent);
+    pointer-events: none; animation: floatUp 1s ease-out forwards;
+  }
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translate(50%,0) scale(1); }
+    100% { opacity: 0; transform: translate(50%,-58px) scale(1.5); }
+  }
+  .btn-salavat {
+    width: 100%; max-width: 460px; font-family: inherit;
+    font-size: 1.02rem; font-weight: 700;
+    padding: 17px 22px; border: none; border-radius: 15px;
+    cursor: pointer; color: #06211a;
+    background: linear-gradient(135deg, #2ee6a8, #12a97c);
+    box-shadow: 0 8px 22px rgba(18,169,124,0.32);
+    transition: transform .2s, box-shadow .25s; line-height: 1.6;
+  }
+  .btn-salavat:hover { transform: translateY(-3px); }
+  .btn-salavat:active { transform: scale(.97); }
+
+  .salavat-actions { display: flex; gap: 10px; width: 100%; max-width: 460px; }
+  .salavat-actions .btn { flex: 1; }
+
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: .9rem;
+    border: none; border-radius: 12px; padding: 12px 16px;
+    cursor: pointer;
+    transition: transform .18s, box-shadow .22s, background .22s, color .22s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn:active { transform: scale(.96); }
+  .btn-reset { background: transparent; border: 1px solid rgba(214,48,49,0.5); color: #e05252; }
+  .btn-reset:hover { background: rgba(214,48,49,0.12); }
+  .btn-save { background: transparent; border: 1px solid var(--card-border); color: var(--text-soft); }
+  .btn-save:hover { color: var(--gold); border-color: var(--gold); }
+
+  .hint { font-size: .72rem; color: var(--text-soft); text-align: center; line-height: 2; }
+  .hint kbd {
+    background: var(--glow); border: 1px solid var(--card-border);
+    border-radius: 5px; padding: 1px 6px;
+    font-family: inherit; font-size: .72rem; color: var(--gold);
+  }
+
+  .haq-hero { text-align: center; padding: 8px 6px 12px; }
+  .haq-hero .orn { font-size: 1.7rem; line-height: 1; margin-bottom: 6px; filter: drop-shadow(0 0 12px var(--ring-glow)); }
+  .haq-hero h2 { font-size: 1.05rem; color: var(--gold); font-weight: 700; line-height: 1.7; margin-bottom: 3px; }
+  .haq-hero p { font-size: .8rem; color: var(--text-soft); line-height: 1.9; }
+
+  .haq-status-card {
+    padding: 14px 15px;
+    background: linear-gradient(135deg, var(--green-soft), var(--glow));
+    border: 1px solid var(--card-border);
+    border-radius: 16px; margin-bottom: 14px;
+    text-align: center;
+  }
+  .haq-status-card .row1 { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; line-height: 1.7; }
+  .haq-status-card .row2 { font-size: .8rem; color: var(--text-soft); line-height: 1.9; }
+
+  .haq-big-btn {
+    display: block; width: 100%;
+    font-family: inherit; font-size: 1.05rem; font-weight: 700;
+    padding: 18px 20px; border: none; border-radius: 16px;
+    cursor: pointer; color: #06211a;
+    background: linear-gradient(135deg, #2ee6a8, #12a97c);
+    box-shadow: 0 10px 28px rgba(18,169,124,0.38);
+    transition: transform .2s, box-shadow .25s;
+    line-height: 1.6; margin-bottom: 14px; position: relative;
+  }
+  .haq-big-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(18,169,124,0.5); }
+  .haq-big-btn:active { transform: scale(.98); }
+  .haq-big-btn .arrow {
+    position: absolute; left: 18px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: nudge 1.5s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%,100% { transform: translate(-3px, -50%); }
+    50% { transform: translate(3px, -50%); }
+  }
+
+  details.acc {
+    background: var(--prayer-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details.acc > summary {
+    padding: 13px 16px; cursor: pointer;
+    font-size: .88rem; font-weight: 700; color: var(--gold);
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background .2s; user-select: none;
+  }
+  details.acc > summary::-webkit-details-marker { display: none; }
+  details.acc > summary::after {
+    content: '▾'; font-size: 1rem; color: var(--text-soft);
+    transition: transform .25s;
+  }
+  details.acc[open] > summary::after { transform: rotate(180deg); color: var(--gold); }
+  details.acc > summary:hover { background: var(--glow); }
+  details.acc > .acc-body {
+    padding: 4px 14px 16px;
+    border-top: 1px solid var(--card-border);
+    animation: fadeIn .2s ease;
+  }
+
+  .haq-ref { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+  .haq-ref-step {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 11px 12px; background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: 12px;
+  }
+  .haq-ref-num {
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: .85rem;
+    box-shadow: 0 4px 12px rgba(212,175,55,0.28);
+  }
+  .haq-ref-body { flex: 1; min-width: 0; }
+  .haq-ref-body .t {
+    font-size: .9rem; font-weight: 700; color: var(--text);
+    margin-bottom: 3px; display: flex; align-items: center; gap: 6px;
+  }
+  .haq-ref-body .t .ico { font-size: .95rem; }
+  .haq-ref-body p { font-size: .78rem; color: var(--text-soft); line-height: 2; text-align: justify; }
+  .haq-ref-body .warn {
+    display: inline-block; margin-top: 6px;
+    font-size: .72rem; color: var(--gold);
+    background: var(--glow);
+    border-right: 2px solid var(--gold);
+    border-radius: 6px; padding: 4px 9px; line-height: 1.9;
+  }
+
+  .haq-notes { padding-top: 12px; }
+  .haq-notes ul { list-style: none; }
+  .haq-notes li {
+    position: relative; padding-right: 20px;
+    font-size: .78rem; line-height: 2.1; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .haq-notes li::before {
+    content: '✦'; position: absolute; right: 4px; top: 0;
+    color: var(--gold); font-size: .8rem;
+  }
+  .haq-notes li.hi { color: var(--gold); font-weight: 600; }
+
+  .haq-day-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 12px 14px;
+    background: var(--prayer-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; margin-bottom: 10px;
+  }
+  .haq-day-info { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .haq-day-info .big {
+    font-size: 1.4rem; font-weight: 700; color: var(--gold);
+    font-variant-numeric: tabular-nums; line-height: 1;
+    text-shadow: 0 0 14px var(--ring-glow);
+  }
+  .haq-day-info .small { font-size: .78rem; color: var(--text-soft); }
+  .haq-day-remain {
+    font-size: .76rem; font-weight: 600;
+    color: var(--accent);
+    background: var(--green-soft);
+    padding: 5px 11px; border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .haq-day-bar {
+    height: 6px; border-radius: 10px;
+    background: var(--scroll-track); overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .haq-day-bar-fill {
+    height: 100%; width: 0%; border-radius: 10px;
+    background: linear-gradient(90deg, var(--green), var(--gold-2));
+    transition: width .5s ease;
+    box-shadow: 0 0 10px var(--ring-glow);
+  }
+
+  .haq-steps-dots {
+    display: flex; align-items: center; justify-content: center;
+    gap: 5px; margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .haq-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: .68rem; font-weight: 700;
+    background: var(--prayer-bg);
+    border: 1.5px solid var(--card-border);
+    color: var(--text-soft);
+    transition: all .25s;
+  }
+  .haq-dot.done {
+    background: linear-gradient(135deg, var(--green), #12a97c);
+    color: #fff; border-color: transparent;
+  }
+  .haq-dot.active {
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a; border-color: transparent;
+    transform: scale(1.12);
+  }
+
+  .haq-step-view {
+    padding: 18px 14px;
+    background: var(--prayer-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    min-height: 200px;
+  }
+  .haq-step-hdr {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-bottom: 6px;
+  }
+  .haq-step-hdr .ico { font-size: 1.5rem; }
+  .haq-step-hdr .t {
+    font-size: 1.05rem; font-weight: 700; color: var(--gold);
+    text-align: center; line-height: 1.6;
+  }
+  .haq-step-sub {
+    text-align: center; font-size: .72rem;
+    color: var(--text-soft); margin-bottom: 14px;
+    letter-spacing: .5px;
+  }
+
+  .haq-step-desc {
+    font-size: 1.05rem;
+    line-height: 2.15;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .haq-step-desc .warn {
+    display: block; margin-top: 10px;
+    font-size: .82rem; color: var(--gold);
+    background: var(--glow);
+    border-right: 2px solid var(--gold);
+    border-radius: 8px; padding: 8px 11px;
+    line-height: 1.95; text-align: right;
+  }
+
+  .haq-inline-text {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px 15px; margin-bottom: 12px;
+    font-family: var(--text-font);
+    font-size: calc(var(--text-base) * 0.95 * var(--text-scale) * var(--mobile-scale));
+    line-height: var(--text-line);
+    text-align: justify; text-align-last: center;
+    max-height: 60vh; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+  }
+  .haq-inline-text::-webkit-scrollbar { width: 6px; }
+  .haq-inline-text::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--gold), var(--gold-2));
+    border-radius: 10px;
+  }
+  .haq-inline-text p { margin-bottom: 1.2em; }
+  .haq-inline-text p:last-child { margin-bottom: 0; }
+
+  .haq-step-text {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px 15px; margin-bottom: 12px;
+    font-family: var(--text-font);
+    font-size: calc(var(--text-base) * 0.88 * var(--text-scale) * var(--mobile-scale));
+    line-height: calc(var(--text-line) - 0.15);
+    text-align: justify; text-align-last: center;
+  }
+  .haq-step-text .lbl {
+    display: block;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: .72rem; font-weight: 700;
+    color: var(--gold); margin-bottom: 8px;
+    text-align: center;
+  }
+  .haq-step-text.salam .lbl { color: var(--accent); }
+  .haq-step-text.lan .lbl { color: #e05252; }
+
+  .haq-dhikr-wrap {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 34px;
+    padding: 8px 4px 4px;
+  }
+
+  .haq-dhikr-ring {
+    position: relative;
+    width: 176px; height: 176px; border-radius: 50%;
+    display: grid; place-items: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+    background: radial-gradient(circle, var(--green-soft), transparent 68%);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 0 32px var(--ring-glow), inset 0 0 32px var(--green-soft);
+    transition: transform .12s ease, box-shadow .3s ease;
+  }
+  .haq-dhikr-ring::before {
+    content: ''; position: absolute; inset: -9px; border-radius: 50%;
+    border: 1px dashed var(--card-border);
+    animation: spin 22s linear infinite; pointer-events: none;
+  }
+  .haq-dhikr-ring:hover {
+    box-shadow: 0 0 0 8px var(--green-soft), 0 0 42px var(--ring-glow), inset 0 0 32px var(--green-soft);
+  }
+  .haq-dhikr-ring.tapped { transform: scale(.94); }
+  .haq-dhikr-ring.complete {
+    background: radial-gradient(circle, rgba(46,230,168,0.28), transparent 70%);
+    border-color: var(--green);
+  }
+  .haq-dhikr-ring .num {
+    font-size: 3rem; font-weight: 700; color: var(--gold);
+    font-variant-numeric: tabular-nums; line-height: 1;
+    text-shadow: 0 0 22px var(--ring-glow);
+  }
+  .haq-dhikr-ring.complete .num { color: var(--green); }
+  .haq-dhikr-ring .lbl { font-size: .7rem; color: var(--text-soft); margin-top: 8px; }
+  .haq-dhikr-ring .inner { display: flex; flex-direction: column; align-items: center; }
+  .haq-dhikr-ring .sub { font-size: .66rem; color: var(--text-soft); margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+  .haq-dhikr-actions {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 320px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--card-border);
+    margin-top: 0;
+    position: relative;
+  }
+  .haq-dhikr-actions::before {
+    content: 'ناحیه امن — از این پایین به‌عنوان دکمه صفر استفاده نکن';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--prayer-bg);
+    padding: 0 10px;
+    font-size: .62rem;
+    color: var(--text-soft);
+    opacity: .55;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .haq-dhikr-reset {
+    font-family: inherit;
+    background: transparent;
+    border: 1.5px solid rgba(214,48,49,0.55);
+    color: #e05252;
+    border-radius: 14px;
+    padding: 14px 26px;
+    font-size: .92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    min-width: 220px;
+    justify-content: center;
+  }
+  .haq-dhikr-reset .reset-ico { font-size: 1.05rem; line-height: 1; }
+  .haq-dhikr-reset:hover {
+    background: rgba(214,48,49,0.12);
+    border-color: #e05252;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(214,48,49,0.18);
+  }
+  .haq-dhikr-reset:active { transform: scale(.97); }
+
+  .haq-step-actions {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 16px;
+  }
+  .haq-next-btn {
+    width: 100%; font-family: inherit;
+    font-size: .95rem; font-weight: 700;
+    padding: 14px 18px; border: none; border-radius: 13px;
+    cursor: pointer; color: #06211a;
+    background: linear-gradient(135deg, #2ee6a8, #12a97c);
+    box-shadow: 0 6px 20px rgba(18,169,124,0.32);
+    transition: transform .2s, box-shadow .25s;
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px; line-height: 1.6;
+  }
+  .haq-next-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(18,169,124,0.45); }
+  .haq-next-btn:active:not(:disabled) { transform: scale(.98); }
+  .haq-next-btn:disabled {
+    background: var(--prayer-bg); color: var(--text-soft);
+    border: 1px dashed var(--card-border);
+    box-shadow: none; cursor: not-allowed; opacity: .75;
+  }
+
+  .haq-finish { text-align: center; padding: 22px 14px; }
+  .haq-finish .big-ico {
+    font-size: 3.4rem; line-height: 1; margin-bottom: 14px;
+    filter: drop-shadow(0 0 20px var(--ring-glow));
+    animation: bounceIn .6s ease;
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .haq-finish h3 { font-size: 1.15rem; color: var(--gold); font-weight: 700; margin-bottom: 10px; line-height: 1.7; }
+  .haq-finish p { font-size: .84rem; color: var(--text-soft); line-height: 2; margin-bottom: 18px; }
+
+  .haq-complete { text-align: center; padding: 26px 14px; }
+  .haq-complete .big-ico {
+    font-size: 4rem; line-height: 1; margin-bottom: 16px;
+    filter: drop-shadow(0 0 24px var(--ring-glow));
+  }
+  .haq-complete h3 { font-size: 1.22rem; color: var(--gold); font-weight: 700; margin-bottom: 12px; line-height: 1.7; }
+  .haq-complete p { font-size: .86rem; color: var(--text); line-height: 2.1; margin-bottom: 10px; }
+
+  .haq-foot-actions { display: flex; gap: 10px; margin-top: 14px; }
+  .haq-foot-actions .btn { flex: 1; font-size: .78rem; padding: 11px 10px; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 9998;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: grid; place-items: center; padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: auto; }
+  .modal-box {
+    background: var(--modal-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 22px 20px 16px;
+    max-width: 380px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transform: scale(.9);
+    transition: transform .25s cubic-bezier(.2,.9,.3,1.3);
+    text-align: center;
+  }
+  .modal-overlay.show .modal-box { transform: scale(1); }
+  .modal-msg {
+    font-size: .92rem; line-height: 2;
+    color: var(--text); margin-bottom: 18px;
+    white-space: pre-line;
+  }
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-btn {
+    flex: 1; font-family: inherit;
+    font-size: .88rem; font-weight: 700;
+    padding: 12px 14px; border: none; border-radius: 12px;
+    cursor: pointer; transition: all .2s;
+  }
+  .modal-btn:active { transform: scale(.97); }
+  .modal-cancel { background: transparent; border: 1px solid var(--card-border); color: var(--text-soft); }
+  .modal-cancel:hover { color: var(--text); border-color: var(--gold); }
+  .modal-confirm { background: linear-gradient(135deg, #ff6b6b, #d63031); color: #fff; }
+  .modal-confirm:hover { transform: translateY(-1px); }
+
+  #toast {
+    position: fixed; bottom: calc(26px + var(--safe-bottom)); left: 50%;
+    transform: translate(-50%, 90px);
+    background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    color: #17202a; font-weight: 700; font-size: .86rem;
+    padding: 12px 24px; border-radius: 13px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s, transform .35s cubic-bezier(.2,.9,.3,1.3);
+    z-index: 9999; max-width: 90vw; text-align: center;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  footer { text-align: center; font-size: .72rem; color: var(--text-soft); opacity: .8; margin-top: 18px; line-height: 2; }
+
+  @media (max-width: 520px) {
+    html { --mobile-scale: 0.9; }
+    body { padding: calc(10px + var(--safe-top)) 8px calc(30px + var(--safe-bottom)); }
+    .card { padding: 12px; border-radius: 16px; }
+    #prayerBox { height: 55vh; min-height: 300px; padding: 15px 12px; }
+    .brand h1 { font-size: 1rem; }
+    .tab-btn { font-size: .74rem; padding: 10px 5px; gap: 3px; }
+    .ring { width: 170px; height: 170px; }
+    .ring .num { font-size: 3rem; }
+    .dedication { font-size: .84rem; gap: 10px; }
+    .dedication::before, .dedication::after { max-width: 40px; }
+
+    .control-bar { gap: 6px; padding: 5px; }
+    .play-btn { padding: 10px 10px; font-size: .82rem; }
+    .speed-pill { flex: 0 1 130px; padding: 5px 9px; gap: 5px; }
+    .jump-btn { width: 34px; height: 34px; }
+
+    .haq-big-btn { font-size: .95rem; padding: 16px 16px; }
+    .haq-hero h2 { font-size: .95rem; }
+    .haq-status-card { padding: 12px 13px; }
+    .haq-status-card .row1 { font-size: .92rem; }
+    .haq-status-card .row2 { font-size: .74rem; }
+
+    .haq-day-info .big { font-size: 1.2rem; }
+    .haq-day-remain { font-size: .7rem; padding: 4px 9px; }
+    .haq-dot { width: 22px; height: 22px; font-size: .64rem; }
+
+    .haq-step-view { padding: 15px 11px; }
+    .haq-step-hdr .t { font-size: .95rem; }
+    .haq-step-desc { font-size: .96rem; }
+    .haq-dhikr-ring { width: 152px; height: 152px; }
+    .haq-dhikr-ring .num { font-size: 2.6rem; }
+    .haq-dhikr-wrap { gap: 28px; }
+    .haq-dhikr-actions { padding-top: 18px; max-width: 280px; }
+    .haq-dhikr-reset { padding: 13px 20px; font-size: .86rem; min-width: 190px; }
+
+    .haq-foot-actions { flex-direction: column; }
+
+    .menu-hint { font-size: .7rem; padding: 8px 12px; max-width: 200px; }
+  }
+
+  @media (max-width: 360px) {
+    .tab-btn { font-size: .68rem; padding: 9px 3px; }
+    .speed-pill { flex: 0 1 100px; }
+    .play-btn .txt { display: none; }
+    .haq-dot { width: 20px; height: 20px; font-size: .6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="ornament">﷽</div>
+      <div>
+        <h1>زیارت عاشورا</h1>
+        <span>به یاد سالار شهیدان، امام حسین علیه‌السلام</span>
+      </div>
+    </div>
+
+    <div class="top-actions" id="topActions">
+      <button class="icon-btn" id="themeBtn" title="حالت شب / روز">🌙</button>
+      <button class="icon-btn" id="menuBtn" title="منو" aria-label="منو">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="menu-hint" id="menuHint">
+        <button class="close-hint" id="closeHint" aria-label="بستن">×</button>
+        <span>👆 از این منو می‌تونی <b>خط، فونت و سایز متن</b> رو تغییر بدی</span>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-section">
+        <div class="menu-label">🔤 تنظیمات متن</div>
+        <div class="menu-row">
+          <button class="m-btn active" id="fontNaskh">نسخ زیبا</button>
+          <button class="m-btn" id="fontSans">ساده و خوانا</button>
+        </div>
+        <div class="menu-row" style="margin-top:7px;">
+          <button class="m-btn small" id="sizeDown" title="کوچک‌تر">A−</button>
+          <button class="m-btn small" id="sizeReset" style="flex:1; font-size:.78rem;">پیش‌فرض</button>
+          <button class="m-btn small" id="sizeUp" title="بزرگ‌تر">A+</button>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-label">👤 سازنده</div>
+        <div class="credit-box">
+          <span class="name">طراحی توسط خوشنویس</span>
+          <span class="role">Khoshnevis · Designer</span>
+          <button class="contact-btn" id="contactCreator">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+            </svg>
+            <span>ارتباط با سازنده</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="ziyarat">📖 زیارت</button>
+    <button class="tab-btn" data-tab="haq">🍃 حق‌شناس</button>
+    <button class="tab-btn" data-tab="salavat">🤲 صلوات</button>
+  </div>
+
+  <div class="tab-content active" id="tab-ziyarat">
+    <div class="card">
+      <div class="dedication">
+        <span class="heart">﷽</span>
+        تقدیم به ساحت مقدس امام زمان (عج)
+        <span class="heart">﷽</span>
+      </div>
+
+      <div id="prayerBox">
+        <p>اَلسَّلامُ عَلَیْکَ یا اَباعَبْدِاللهِ، اَلسَّلامُ عَلَیْکَ یَابْنَ رَسُولِ اللهِ، اَلسَّلامُ عَلَیْکَ یَابْنَ اَمیرِ الْمُؤْمِنینَ، وَابْنَ سَیِّدِ الْوَصِیّینَ، اَلسَّلامُ عَلَیْکَ یَابْنَ فاطِمَةَ سَیِّدَةِ نِسآءِ الْعالِمینَ، اَلسَّلامُ عَلَیْکَ یا ثارَ اللهِ وَابْنَ ثارِهِ، وَالْوِتْرَ الْمَوْتُورَ، اَلسَّلامُ عَلَیْکَ وَعَلَى الاَْرْواحِ الَّتى حَلَّتْ بِفِنآئِکَ، عَلَیْکُمْ مِنّى جَمیعاً سَلامُ اللهِ اَبَداً ما بَقیتُ وَبَقِىَ اللَّیْلُ وَالنَّهارُ.</p>
+        <p>یا اَباعَبْدِاللهِ لَقَدْ عَظُمَتِ الرَّزِیَّةُ، وَجَلَّتْ وَعَظُمَتِ الْمُصیبَةُ بِکَ عَلَیْنا وَعَلى جَمیعِ اَهْلِ الاِْسْلامِ، وَجَلَّتْ وَعَظُمَتْ مُصیبَتُکَ فِى السَّمواتِ، عَلى جَمیعِ اَهْلِ السَّمواتِ، فَلَعَنَ اللهُ اُمَّةً اَسَّسَتْ اَساسَ الظُّلْمِ وَالْجَوْرِ عَلَیْکُمْ اَهْلَ الْبَیْتِ، وَلَعَنَ اللهُ اُمَّةً دَفَعَتْکُمْ عَنْ مَقامِکُمْ، وَاَزالَتْکُمْ عَنْ مَراتِبِکُمُ الَّتى رَتَّبَکُمُ اللهُ فیها، وَلَعَنَ اللهُ اُمَّةً قَتَلَتْکُمْ، وَلَعَنَ اللهُ الْمُمَهِّدینَ لَهُمْ بِالتَّمْکینِ مِنْ قِتالِکُمْ.</p>
+        <p>بَرِئْتُ اِلَى اللهِ وَاِلَیْکُمْ مِنْهُمْ، وَمِنْ اَشْیاعِهِمْ وَاَتْباعِهِمْ وَاَوْلِیآئِهِم.</p>
+        <p>یا اَباعَبْدِاللهِ اِنّى سِلْمٌ لِمَنْ سالَمَکُمْ، وَحَرْبٌ لِمَنْ حارَبَکُمْ اِلى یَوْمِ الْقِیامَةِ، وَلَعَنَ اللهُ آلَ زِیاد وَآلَ مَرْوانَ، وَلَعَنَ اللهُ بَنى اُمَیَّةَ قاطِبَةً، وَلَعَنَ اللهُ ابْنَ مَرْجانَةَ، وَلَعَنَ اللهُ عُمَرَ بْنَ سَعْد، وَلَعَنَ اللهُ شِمْراً، وَلَعَنَ اللهُ اُمَّةً اَسْرَجَتْ وَاَلْجَمَتْ وَتَنَقَّبَتْ لِقِتالِکَ.</p>
+        <p>بِاَبى اَنْتَ وَاُمّى، لَقَدْ عَظُمَ مُصابى بِکَ، فَاَسْئَلُ اللهَ الَّذى اَکْرَمَ مَقامَکَ وَاَکْرَمَنى بِکَ، اَنْ یَرْزُقَنى طَلَبَ ثارِکَ مَعَ اِمام مَنْصُور مِنْ اَهْلِ بَیْتِ مُحَمَّد صَلَّى اللهُ عَلَیْهِ وَآلِهِ.</p>
+        <p>اَللّـهُمَّ اجْعَلْنى عِنْدَکَ وَجیهاً بِالْحُسَیْنِ عَلَیْهِ السَّلامُ فِى الدُّنْیا وَالاْخِرَةِ.</p>
+        <p>یا اَبا عَبْدِاللهِ، اِنّى اَتَقَرَّبُ اِلى اللهِ وَاِلى رَسُولِهِ، وَاِلى اَمیرِالْمُؤْمِنینَ وَاِلى فاطِمَةَ، وَاِلَى الْحَسَنِ وَاِلَیْکَ بِمُوالاتِکَ، وَبِالْبَرآئَةِ مِمَّنْ اَسَسَّ اَساسَ ذلِکَ، وَبَنى عَلَیْهِ بُنْیانَهُ، وَجَرى فى ظُلْمِهِ وَجَوْرِهِ عَلَیْکُمْ، وَعلى اَشْیاعِکُمْ، بَرِئْتُ اِلَى اللهِ وَاِلَیْکُمْ مِنْهُمْ، وَاَتَقَرَّبُ اِلَى اللهِ، ثُمَّ اِلَیْکُمْ بِمُوالاتِکُمْ وَمُوالاةِ وَلِیِّکُمْ، وَبِالْبَرآئَةِ مِنْ اَعْدآئِکُمْ وَالنّاصِبینَ لَکُمُ الْحَرْبَ، وَبِالْبَرآئَةِ مِنْ اَشْیاعِهِمْ وَاَتْباعِهِمْ.</p>
+        <p>اِنّى سِلْمٌ لِمَنْ سالَمَکُمْ، وَحَرْبٌ لِمَنْ حارَبَکُمْ، وَوَلِىٌّ لِمَنْ والاکُمْ، وَعَدُوٌّ لِمَنْ عاداکُمْ، فَاَسْئَلُ اللهَ الَّذى اَکْرَمَنى بِمَعْرِفَتِکُمْ وَمَعْرِفَةِ اَوْلِیآئِکُمْ، وَرَزَقَنِى الْبَرآئَةَ مِنْ اَعْدآئِکُمْ، اَنْ یَجْعَلَنى مَعَکُمْ فِى الدُّنْیا وَالاْخِرَةِ، وَاَنْ یُثَبِّتَ لى عِنْدَکُمْ قَدَمَ صِدْق فِى الدُّنْیا وَالاْخِرَةِ، وَاَسْئَلُهُ اَنْ یُبَلِّغَنِى الْمَقامَ الْمَحْمُودَ لَکُمْ عِنْدَاللهِ، وَ اَنْ یَرْزُقَنى طَلَبَ ثارى مَعَ اِمام هُدىً ظاهِر ناطِق بِالْحَقِّ مِنْکُمْ.</p>
+        <p>وَاَسْئَلُ اللهَ بِحَقِّکُمْ وَبِالشَّاْنِ الَّذى لَکُمْ عِنْدَهُ، اَنْ یُعْطِیَنى بِمُصابى بِکُمْ اَفْضَلَ ما یُعْطى مُصاباً بِمُصیبَتِهِ، مُصیبَةً ما اَعْظَمَها وَاَعْظَمَ رَزِیَّتَها فِى الاِْسْلامِ، وَفى جَمیعِ السَّمواتِ وَالاَْرْضِ.</p>
+        <p>اَللّـهُمَّ اجْعَلْنى فى مَقامى هذا مِمَّنْ تَنالُهُ مِنْکَ صَلَواتٌ وَرَحْمَةٌ وَمَغْفِرَةٌ، اَللّـهُمَّ اجْعَلْ مَحْیاىَ مَحْیا مُحَمَّد وَآلِ مُحَمَّد، وَمَماتى مَماتَ مُحَمَّد وَآلِ مُحَمَّد.</p>
+        <p>اَللّهُمَّ اِنَّ هذا یَوْمٌ تَبَرَّکَتْ بِهِ بَنُو اُمَیَّةَ، وَابْنُ آکِلَةِ الاَْکبادِ، اَللَّعینُ ابْنُ اللَّعینِ، عَلى لِسانِکَ وَلِسانِ نَبِیِّکَ صَلَّى اللهُ عَلَیْهِ وَآلِهِ، فى کُلِّ مَوْطِن وَمَوْقِف وَقَفَ فیهِ نَبِیُّکَ صَلَّى اللهُ عَلَیْهِ وَآلِهِ، اَللّـهُمَّ الْعَنْ اَبا سُفْیانَ وَمُعوِیَةَ وَ یَزیدَ بْنَ مُعاوِیَةَ، عَلَیْهِمْ مِنْکَ اللَّعْنَةُ اَبَدَ الاْبِدینَ.</p>
+        <p>وَهذا یَوْمٌ فَرِحَتْ بِهِ آلُ زِیاد وَآلُ مَرْوانَ بِقَتْلِهِمُ الْحُسَیْنَ صَلَواتُ اللهِ عَلَیْهِ، اَللّـهُمَّ فَضاعِفْ عَلَیْهِمُ اللَّعْنَ مِنْکَ وَالْعَذابَ، اَللّـهُمَّ اِنّى اَتَقَرَّبُ اِلَیْکَ فى هذَا الْیَوْمِ، وَفى مَوْقِفى هذا وَاَیّامِ حَیاتى، بِالْبَرآئَةِ مِنْهُمْ وَاللَّعْنَةِ عَلَیْهِمْ، وَبِالْمُوالاتِ لِنَبِیِّکَ وَ آلِ نَبِیِّکَ عَلَیْهِ وَعَلَیْهِمُ اَلسَّلامُ.</p>
+        <div class="divider">❁ ❁ ❁</div>
+        <p class="note">سپس صد مرتبه مى‌گویى:</p>
+        <p class="takrar">اَللّهُمَّ الْعَنْ اَوَّلَ ظالِم ظَلَمَ حَقَّ مُحَمَّد وَآلِ مُحَمَّد، وَآخِرَ تابِع لَهُ عَلى ذلِکَ، اَللّـهُمَّ الْعَنِ الْعِصابَةَ الَّتى جاهَدَتِ الْحُسَیْنَ، وَشایَعَتْ وَبایَعَتْ وَتابَعَتْ عَلى قَتْلِهِ، اَللّهُمَّ الْعَنْهُمْ جَمیعاً.</p>
+        <p class="note">آنگاه صد مرتبه مى‌گویى:</p>
+        <p class="takrar">اَلسَّلامُ عَلَیْکَ یا اَباعَبْدِاللهِ، وَعَلَى الاَْرْواحِ الَّتى حَلَّتْ بِفِنآئِکَ، عَلَیْکَ مِنّى سَلامُ اللهِ اَبَداً ما بَقیتُ وَبَقِىَ اللَّیْلُ وَالنَّهارُ، وَلا جَعَلَهُ اللهُ آخِرَ الْعَهْدِ مِنّى لِزِیارَتِکُمْ، اَلسَّلامُ عَلَى الْحُسَیْنِ، وَعَلى عَلِىِّ بْنِ الْحُسَیْنِ، وَعَلى اَوْلادِ الْحُسَیْنِ، وَعَلى اَصْحابِ الْحُسَیْنِ.</p>
+        <p class="note">سپس مى‌گویى:</p>
+        <p class="takrar">اَللّـهُمَّ خُصَّ اَنْتَ اَوَّلَ ظالِم بِاللَّعْنِ مِنّى، وَابْدَأْ بِهِ اَوَّلاً ثُمَّ الثّانِىَ وَالثّالِثَ وَالرّابِعَ، اَللّهُمَّ الْعَنْ یَزیدَ خامِساً، وَالْعَنْ عُبَیْدَ اللهِ بْنَ زِیاد وَابْنَ مَرْجانَةَ وَعُمَرَ بْنَ سَعْد وَشِمْراً، وَآلَ اَبى سُفْیانَ وَ آلَ زِیاد وَ آلَ مَرْوانَ اِلى یَوْمِ الْقِیمَةِ.</p>
+        <p class="note">آنگاه به سجده مى‌روى و مى‌گویى:</p>
+        <p class="takrar">اَللّهُمَّ لَکَ الْحَمْدُ حَمْدَالشّاکِرینَ لَکَ عَلى مُصابِهِمْ، اَلْحَمْدُ للهِِ عَلى عَظیمِ رَزِیَّتى، اَللّهُمَّ ارْزُقْنى شَفاعَةَ الْحُسَیْنِ یَوْمَ الْوُرُودِ، وَثَبِّتْ لى قَدَمَ صِدْق عِنْدَکَ مَعَ الْحُسَیْنِ وَ اَصْحابِ الْحُسَیْنِ، اَلَّذینَ بَذَلُوا مُهَجَهُمْ دُونَ الْحُسَیْنِ عَلَیْهِ السَّلامُ.</p>
+      </div>
+
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+      <div class="control-bar">
+        <button class="play-btn" id="scrollToggle">
+          <span class="ico">▶</span>
+          <span class="txt">شروع اسکرول</span>
+        </button>
+        <div class="speed-pill">
+          <span class="ico">🐢</span>
+          <input type="range" id="speed" min="1" max="10" value="4" aria-label="سرعت">
+          <span class="ico">🐇</span>
+        </div>
+        <button class="jump-btn" id="toTop" title="ابتدای متن">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+        </button>
+        <button class="jump-btn" id="toBottom" title="انتهای متن">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-haq">
+    <div class="card">
+
+      <div id="haqIntro">
+        <div class="haq-hero">
+          <div class="orn">🍃🌺</div>
+          <h2>زیارت عاشورا با روش آیت‌الله حق‌شناس (ره)</h2>
+          <p>چله ۴۰ روزه — با صد لعن و صد سلام</p>
+        </div>
+
+        <div class="haq-status-card">
+          <div class="row1" id="haqStatusTitle">آماده برای شروع</div>
+          <div class="row2" id="haqStatusSub">چله ۴۰ روزه، إن‌شاءالله</div>
+        </div>
+
+        <button class="haq-big-btn" id="haqMainBtn">
+          <span class="arrow">←</span>
+          <span id="haqMainBtnText">🌿 شروع چله — روز ۱</span>
+        </button>
+
+        <details class="acc">
+          <summary>📋 دستورالعمل کامل (۷ مرحله)</summary>
+          <div class="acc-body">
+            <div class="haq-ref">
+              <div class="haq-ref-step"><div class="haq-ref-num">۱</div><div class="haq-ref-body"><div class="t"><span class="ico">🕋</span> ۱۰۰ الله اکبر</div><p>تعداد ۱۰۰ مرتبه «الله اکبر» گفته شود.</p></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۲</div><div class="haq-ref-body"><div class="t"><span class="ico">🤲</span> یک سلام و یک لعن</div><p>بعد از ۱۰۰ الله اکبر، یک بار سلام و یک بار لعن گفته شود — بدون خواندن زیارت عاشورا.</p></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۳</div><div class="haq-ref-body"><div class="t"><span class="ico">📖</span> زیارت تا ابتدای ۱۰۰ لعن</div><p>از ابتدای زیارت بخوانید تا ابتدای ۱۰۰ لعن.</p><span class="warn">⚠️ لعن و سلام گفته نمی‌شود و ادامه زیارت خوانده نمی‌شود.</span></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۴</div><div class="haq-ref-body"><div class="t"><span class="ico">🕌</span> دو رکعت نماز</div><p>دو رکعت نماز هدیه به امام حسین علیه‌السلام.</p></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۵</div><div class="haq-ref-body"><div class="t"><span class="ico">🕋</span> ۱۰۰ الله اکبر (دوم)</div><p>مجدداً ۱۰۰ مرتبه «الله اکبر».</p></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۶</div><div class="haq-ref-body"><div class="t"><span class="ico">📿</span> ۱۰۰ لعن و ۱۰۰ سلام + ادامه زیارت</div><p>از ابتدای زیارت تا ۱۰۰ لعن، سپس ۱۰۰ لعن و ۱۰۰ سلام، بعد ادامه زیارت تا سجده.</p></div></div>
+              <div class="haq-ref-step"><div class="haq-ref-num">۷</div><div class="haq-ref-body"><div class="t"><span class="ico">🕌</span> دو رکعت نماز زیارت</div><p>دو رکعت نماز زیارت امام حسین علیه‌السلام.</p></div></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>📌 نکات مهم چله</summary>
+          <div class="acc-body">
+            <div class="haq-notes">
+              <ul>
+                <li>بهترین روز برای شروع، <b>چهارشنبه</b> است.</li>
+                <li>هنگام خواندن زیارت، <b>با کسی صحبت نکنید</b>.</li>
+                <li>وقت خواندن باید از <b>طلوع تا قبل از غروب</b> باشد.</li>
+                <li>ترتیب باید رعایت شود؛ از شماره ۱ تا ۷.</li>
+                <li>به اندازه وسع، <b>صدقه به امام زمان (عج)</b> داده شود.</li>
+                <li>مهم‌ترین مطلب، <b>مراقب اعمال بودن</b> است (ترک گناه، انجام واجبات).</li>
+                <li>اگر تعداد ۱۰۰ لعن و سلام چندتا زیاد شد، اشکالی ندارد چون نیت ۱۰۰ بوده.</li>
+                <li class="hi">🤲 این چله برای فرج مولامون حضرت مهدی (عج) خوانده شود — فرج امام زمان را روبرو و حاجت خود را پشت سر فرج ایشان قرار دهیم.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <div class="haq-foot-actions" id="haqIntroReset" style="display:none">
+          <button class="btn btn-reset" id="haqResetBtnIntro">🗑 صفر کردن روزهای چله</button>
+        </div>
+      </div>
+
+      <div id="haqDaily" style="display:none">
+        <div class="haq-day-header">
+          <div class="haq-day-info">
+            <div class="big" id="haqDayBig">روز ۱</div>
+            <div class="small">از ۴۰</div>
+          </div>
+          <div class="haq-day-remain" id="haqDayRemain">۳۹ روز مانده</div>
+        </div>
+
+        <div class="haq-day-bar"><div class="haq-day-bar-fill" id="haqDayBar"></div></div>
+
+        <div class="haq-steps-dots" id="haqStepsDots"></div>
+
+        <div class="haq-step-view" id="haqStepView"></div>
+
+        <div class="haq-foot-actions">
+          <button class="btn btn-save" id="haqViewIntroBtn">📋 دستورالعمل</button>
+          <button class="btn btn-reset" id="haqResetBtnDaily">🗑 صفر کردن روزهای چله</button>
+        </div>
+      </div>
+
+      <div id="haqComplete" style="display:none">
+        <div class="haq-complete">
+          <div class="big-ico">🌹🌺</div>
+          <h3>چله ۴۰ روزه کامل شد!</h3>
+          <p>قبول باشه إن‌شاءالله 🤲</p>
+          <p style="font-size:.78rem;color:var(--text-soft);">برای فرج مولامون حضرت مهدی (عج) — التماس دعا</p>
+          <div class="haq-foot-actions">
+            <button class="btn btn-save" id="haqViewIntroFromComplete">📋 دستورالعمل</button>
+            <button class="btn btn-reset" id="haqResetBtnComplete">🗑 صفر کردن روزهای چله</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-salavat">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🤲 صلوات شمار</div>
+        <span class="badge">ذخیره خودکار</span>
+      </div>
+      <div class="salavat-area">
+        <div class="ring" id="ring">
+          <div class="inner">
+            <div class="num" id="salavatNum">۰</div>
+            <div class="lbl">صلوات</div>
+          </div>
+        </div>
+        <button class="btn-salavat" id="addBtn">اللهم صل علی محمد و آل محمد 🤍</button>
+        <div class="salavat-actions">
+          <button class="btn btn-save" id="saveBtn">💾 ذخیره</button>
+          <button class="btn btn-reset" id="resetBtn">🔄 صفر کردن</button>
+        </div>
+        <div class="hint">با کلید <kbd>Space</kbd> هم سریع صلوات بفرست<br>تعداد در مرورگر ذخیره می‌شود</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>التماس دعا 🤲 — یاد امام حسین (ع) همیشه در دل‌ها زنده باد</footer>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-msg" id="modalMsg"></div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-cancel" id="modalCancel">لغو</button>
+      <button class="modal-btn modal-confirm" id="modalConfirm">تأیید</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ═══════════════════════════════════════════════════════════
+     🔵 اتصال به مینی‌اپ بله
+     ═══════════════════════════════════════════════════════════ */
+  const BaleApp = (window.Bale && window.Bale.WebApp) ? window.Bale.WebApp : null;
+  const isInsideBale = !!BaleApp;
+
+  if (BaleApp) {
+    try {
+      // آماده‌سازی مینی‌اپ
+      if (BaleApp.ready) BaleApp.ready();
+      // باز کردن تمام‌صفحه
+      if (BaleApp.expand) BaleApp.expand();
+      // فعال کردن غیرفعال شدن سوایپ برای بستن (اختیاری)
+      if (BaleApp.disableVerticalSwipes) BaleApp.disableVerticalSwipes();
+    } catch (e) { /* نادیده بگیر */ }
+  }
+
+  const memoryStore = {};
+  const store = {
+    get(k, def) {
+      try {
+        const v = localStorage.getItem(k);
+        if (v !== null) return v;
+      } catch (e) {}
+      return (k in memoryStore) ? memoryStore[k] : def;
+    },
+    set(k, v) {
+      memoryStore[k] = String(v);
+      try { localStorage.setItem(k, String(v)); } catch (e) {}
+    }
+  };
+
+  const faDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  const toFa = n => String(n).replace(/\d/g, d => faDigits[d]);
+
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function toast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1900);
+  }
+
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalMsg = document.getElementById('modalMsg');
+  const modalConfirm = document.getElementById('modalConfirm');
+  const modalCancel = document.getElementById('modalCancel');
+  let modalResolve = null;
+
+  function showConfirm(msg) {
+    return new Promise((resolve) => {
+      modalMsg.textContent = msg;
+      modalOverlay.classList.add('show');
+      modalResolve = resolve;
+    });
+  }
+  function closeModal(val) {
+    modalOverlay.classList.remove('show');
+    if (modalResolve) { modalResolve(val); modalResolve = null; }
+  }
+  modalConfirm.addEventListener('click', () => closeModal(true));
+  modalCancel.addEventListener('click', () => closeModal(false));
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('show')) closeModal(false);
+  });
+
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'night' ? '☀️' : '🌙';
+    themeBtn.title = t === 'night' ? 'حالت روز' : 'حالت شب';
+    store.set('zy_theme', t);
+  }
+
+  // 🌗 تشخیص تم: اول از بله، بعد از localStorage
+  let initialTheme = store.get('zy_theme', null);
+  if (!initialTheme) {
+    if (isInsideBale && BaleApp.colorScheme) {
+      initialTheme = BaleApp.colorScheme === 'light' ? 'day' : 'night';
+    } else {
+      initialTheme = 'night';
+    }
+  }
+  applyTheme(initialTheme);
+
+  // هماهنگی خودکار با تغییرات تم بله
+  if (isInsideBale && BaleApp.onEvent) {
+    try {
+      BaleApp.onEvent('themeChanged', () => {
+        const t = BaleApp.colorScheme === 'light' ? 'day' : 'night';
+        applyTheme(t);
+      });
+    } catch (e) {}
+  }
+
+  themeBtn.addEventListener('click', () => {
+    applyTheme(html.getAttribute('data-theme') === 'night' ? 'day' : 'night');
+  });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const menuPanel = document.getElementById('menuPanel');
+  const menuHint = document.getElementById('menuHint');
+  const closeHintBtn = document.getElementById('closeHint');
+  const HINT_KEY = 'zy_menu_hint_shown';
+
+  function hideHint() {
+    menuHint.classList.remove('show');
+    menuBtn.classList.remove('hint-pulse');
+    store.set(HINT_KEY, '1');
+  }
+  function showHintIfFirstTime() {
+    if (store.get(HINT_KEY, '0') === '1') return;
+    setTimeout(() => {
+      menuHint.classList.add('show');
+      menuBtn.classList.add('hint-pulse');
+      setTimeout(() => {
+        if (menuHint.classList.contains('show')) hideHint();
+      }, 8000);
+    }, 1200);
+  }
+  closeHintBtn.addEventListener('click', (e) => { e.stopPropagation(); hideHint(); });
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuPanel.classList.toggle('open');
+    if (menuPanel.classList.contains('open')) hideHint();
+  });
+  document.addEventListener('click', (e) => {
+    if (!menuPanel.classList.contains('open')) return;
+    if (menuPanel.contains(e.target) || menuBtn.contains(e.target)) return;
+    menuPanel.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') menuPanel.classList.remove('open');
+  });
+
+  const TG_USERNAME = 'Telaagram';
+  const TG_MESSAGE = 'سلام 👋\nاز برنامه زیارت عاشورا استفاده می‌کنم.\nخواستم تشکر کنم و اگر پیشنهادی داشتید بفرمایید.';
+
+  document.getElementById('contactCreator').addEventListener('click', () => {
+    const encodedMsg = encodeURIComponent(TG_MESSAGE);
+    const appUrl = 'tg://resolve?domain=' + TG_USERNAME + '&text=' + encodedMsg;
+    const webUrl = 'https://t.me/' + TG_USERNAME;
+
+    let fellBack = false;
+    const fallbackTimer = setTimeout(() => {
+      if (!fellBack) { fellBack = true; window.open(webUrl, '_blank'); }
+    }, 1400);
+
+    const onVisChange = () => {
+      if (document.hidden) {
+        fellBack = true;
+        clearTimeout(fallbackTimer);
+        document.removeEventListener('visibilitychange', onVisChange);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisChange);
+
+    try { window.location.href = appUrl; }
+    catch (e) {
+      clearTimeout(fallbackTimer);
+      window.open(webUrl, '_blank');
+    }
+  });
+
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.toggle('active', b === btn));
+      tabContents.forEach(c => c.classList.toggle('active', c.id === 'tab-' + target));
+
+      if (target !== 'ziyarat') stopScroll();
+      if (target === 'ziyarat') setTimeout(() => updateProgress(), 60);
+      if (target === 'haq') renderHaqView();
+    });
+  });
+
+  const numEl    = document.getElementById('salavatNum');
+  const ringEl   = document.getElementById('ring');
+  const addBtn   = document.getElementById('addBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const saveBtn  = document.getElementById('saveBtn');
+
+  let salavatCount = parseInt(store.get('zy_salavat', '0'), 10);
+  if (isNaN(salavatCount) || salavatCount < 0) salavatCount = 0;
+
+  const renderSalavat = () => numEl.textContent = toFa(salavatCount);
+  const saveSalavat   = () => store.set('zy_salavat', salavatCount);
+
+  function bumpSalavat() {
+    salavatCount++; renderSalavat(); saveSalavat();
+    numEl.classList.remove('pulse'); void numEl.offsetWidth; numEl.classList.add('pulse');
+    const plus = document.createElement('span');
+    plus.className = 'float-plus'; plus.textContent = '+۱';
+    ringEl.appendChild(plus);
+    setTimeout(() => plus.remove(), 1000);
+    if (salavatCount === 14)  toast('۱۴ صلوات — یا زهرا 🌸');
+    if (salavatCount === 100) toast('صد صلوات! قبول باشه 🤲');
+    if (salavatCount === 313) toast('۳۱۳ صلوات — یا صاحب‌الزمان 💚');
+    if (isInsideBale && BaleApp.HapticFeedback) {
+      try { BaleApp.HapticFeedback.impactOccurred('light'); } catch(e) {}
+    }
+  }
+  renderSalavat();
+  addBtn.addEventListener('click', bumpSalavat);
+  ringEl.addEventListener('click', bumpSalavat);
+
+  resetBtn.addEventListener('click', async () => {
+    if (salavatCount === 0) { toast('تعداد الان صفر است'); return; }
+    const ok = await showConfirm('آیا مطمئنید که می‌خواهید صلوات‌ها را صفر کنید؟');
+    if (ok) {
+      salavatCount = 0; renderSalavat(); saveSalavat();
+      toast('تعداد صلوات‌ها صفر شد ✅');
+    }
+  });
+  saveBtn.addEventListener('click', () => { saveSalavat(); toast('ذخیره شد 💾'); });
+
+  const box         = document.getElementById('prayerBox');
+  const toggleBtn   = document.getElementById('scrollToggle');
+  const toggleIco   = toggleBtn.querySelector('.ico');
+  const toggleTxt   = toggleBtn.querySelector('.txt');
+  const speedInput  = document.getElementById('speed');
+  const toTopBtn    = document.getElementById('toTop');
+  const toBottomBtn = document.getElementById('toBottom');
+  const progress    = document.getElementById('progressFill');
+
+  let running = false, rafId = null, lastTime = 0;
+  const speedPxPerSec = () => {
+    const v = parseInt(speedInput.value, 10) || 4;
+    return 20 + (v - 1) * (130 / 9);
+  };
+  function updateProgress() {
+    const max = box.scrollHeight - box.clientHeight;
+    progress.style.width = (max > 0 ? (box.scrollTop / max) * 100 : 0) + '%';
+  }
+  function tick(ts) {
+    if (!running) return;
+    if (!lastTime) lastTime = ts;
+    let dt = (ts - lastTime) / 1000; lastTime = ts;
+    if (dt > 0.1) dt = 0.1;
+    if (dt <= 0) { rafId = requestAnimationFrame(tick); return; }
+    const max = box.scrollHeight - box.clientHeight;
+    if (max <= 0) { stopScroll(); return; }
+    const next = box.scrollTop + speedPxPerSec() * dt;
+    if (next >= max - 0.5) {
+      box.scrollTop = max; updateProgress(); stopScroll();
+      toast('به پایان زیارت رسیدیم 🤲'); return;
+    }
+    box.scrollTop = next; updateProgress();
+    rafId = requestAnimationFrame(tick);
+  }
+  function startScroll() {
+    if (running) return;
+    const max = box.scrollHeight - box.clientHeight;
+    if (max <= 0) { toast('متن کافی نیست'); return; }
+    if (box.scrollTop >= max - 1) box.scrollTop = 0;
+    running = true; lastTime = 0;
+    toggleIco.textContent = '⏸'; toggleTxt.textContent = 'توقف';
+    toggleBtn.classList.add('running');
+    rafId = requestAnimationFrame(tick);
+  }
+  function stopScroll() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId); rafId = null;
+    toggleIco.textContent = '▶'; toggleTxt.textContent = 'شروع اسکرول';
+    toggleBtn.classList.remove('running');
+  }
+  toggleBtn.addEventListener('click', () => running ? stopScroll() : startScroll());
+  box.addEventListener('wheel', () => { if (running) stopScroll(); }, { passive: true });
+  box.addEventListener('touchstart', () => { if (running) stopScroll(); }, { passive: true });
+  toTopBtn.addEventListener('click', () => { stopScroll(); box.scrollTop = 0; updateProgress(); });
+  toBottomBtn.addEventListener('click', () => { stopScroll(); box.scrollTop = box.scrollHeight; updateProgress(); });
+  box.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  setTimeout(updateProgress, 100);
+  setTimeout(updateProgress, 500);
+
+  const fontNaskh = document.getElementById('fontNaskh');
+  const fontSans  = document.getElementById('fontSans');
+
+  function applyFont(mode) {
+    const isSans = mode === 'sans';
+    html.classList.toggle('sans', isSans);
+    fontNaskh.classList.toggle('active', !isSans);
+    fontSans.classList.toggle('active', isSans);
+    store.set('zy_font_mode', mode);
+    setTimeout(updateProgress, 50);
+  }
+  applyFont(store.get('zy_font_mode', 'naskh') || 'naskh');
+  fontNaskh.addEventListener('click', () => applyFont('naskh'));
+  fontSans.addEventListener('click',  () => applyFont('sans'));
+
+  let sizeScale = parseFloat(store.get('zy_font_size', '1'));
+  if (isNaN(sizeScale) || sizeScale <= 0) sizeScale = 1;
+
+  function applySize() {
+    html.style.setProperty('--text-scale', sizeScale);
+    store.set('zy_font_size', sizeScale);
+    setTimeout(updateProgress, 50);
+  }
+  applySize();
+
+  document.getElementById('sizeUp').addEventListener('click', () => {
+    if (sizeScale >= 1.7) return;
+    sizeScale = Math.min(1.7, +(sizeScale + 0.1).toFixed(2)); applySize();
+  });
+  document.getElementById('sizeDown').addEventListener('click', () => {
+    if (sizeScale <= 0.75) return;
+    sizeScale = Math.max(0.75, +(sizeScale - 0.1).toFixed(2)); applySize();
+  });
+  document.getElementById('sizeReset').addEventListener('click', () => {
+    sizeScale = 1; applySize(); toast('اندازه فونت پیش‌فرض شد');
+  });
+
+  const HAQ_TOTAL_DAYS = 40;
+
+  const ZIYARAT_TEXT_A = `
+    <p>اَلسَّلامُ عَلَیْکَ یا اَباعَبْدِاللهِ، اَلسَّلامُ عَلَیْکَ یَابْنَ رَسُولِ اللهِ، اَلسَّلامُ عَلَیْکَ یَابْنَ اَمیرِ الْمُؤْمِنینَ، وَابْنَ سَیِّدِ الْوَصِیّینَ، اَلسَّلامُ عَلَیْکَ یَابْنَ فاطِمَةَ سَیِّدَةِ نِسآءِ الْعالِمینَ، اَلسَّلامُ عَلَیْکَ یا ثارَ اللهِ وَابْنَ ثارِهِ، وَالْوِتْرَ الْمَوْتُورَ، اَلسَّلامُ عَلَیْکَ وَعَلَى الاَْرْواحِ الَّتى حَلَّتْ بِفِنآئِکَ، عَلَیْکُمْ مِنّى جَمیعاً سَلامُ اللهِ اَبَداً ما بَقیتُ وَبَقِىَ اللَّیْلُ وَالنَّهارُ.</p>
+    <p>یا اَباعَبْدِاللهِ لَقَدْ عَظُمَتِ الرَّزِیَّةُ، وَجَلَّتْ وَعَظُمَتِ الْمُصیبَةُ بِکَ عَلَیْنا وَعَلى جَمیعِ اَهْلِ الاِْسْلامِ، وَجَلَّتْ وَعَظُمَتْ مُصیبَتُکَ فِى السَّمواتِ، عَلى جَمیعِ اَهْلِ السَّمواتِ، فَلَعَنَ اللهُ اُمَّةً اَسَّسَتْ اَساسَ الظُّلْمِ وَالْجَوْرِ عَلَیْکُمْ اَهْلَ الْبَیْتِ، وَلَعَنَ اللهُ اُمَّةً دَفَعَتْکُمْ عَنْ مَقامِکُمْ، وَاَزالَتْکُمْ عَنْ مَراتِبِکُمُ الَّتى رَتَّبَکُمُ اللهُ فیها، وَلَعَنَ اللهُ اُمَّةً قَتَلَتْکُمْ، وَلَعَنَ اللهُ الْمُمَهِّدینَ لَهُمْ بِالتَّمْکینِ مِنْ قِتالِکُمْ.</p>
+    <p>بَرِئْتُ اِلَى اللهِ وَاِلَیْکُمْ مِنْهُمْ، وَمِنْ اَشْیاعِهِمْ وَاَتْباعِهِمْ وَاَوْلِیآئِهِم.</p>
+    <p>یا اَباعَبْدِاللهِ اِنّى سِلْمٌ لِمَنْ سالَمَکُمْ، وَحَرْبٌ لِمَنْ حارَبَکُمْ اِلى یَوْمِ الْقِیامَةِ، وَلَعَنَ اللهُ آلَ زِیاد وَآلَ مَرْوانَ، وَلَعَنَ اللهُ بَنى اُمَیَّةَ قاطِبَةً، وَلَعَنَ اللهُ ابْنَ مَرْجانَةَ، وَلَعَنَ اللهُ عُمَرَ بْنَ سَعْد، وَلَعَنَ اللهُ شِمْراً، وَلَعَنَ اللهُ اُمَّةً اَسْرَجَتْ وَاَلْجَمَتْ وَتَنَقَّبَتْ لِقِتالِکَ.</p>
+    <p>بِاَبى اَنْتَ وَاُمّى، لَقَدْ عَظُمَ مُصابى بِکَ، فَاَسْئَلُ اللهَ الَّذى اَکْرَمَ مَقامَکَ وَاَکْرَمَنى بِکَ، اَنْ یَرْزُقَنى طَلَبَ ثارِکَ مَعَ اِمام مَنْصُور مِنْ اَهْلِ بَیْتِ مُحَمَّد صَلَّى اللهُ عَلَیْهِ وَآلِهِ.</p>
+    <p>اَللّـهُمَّ اجْعَلْنى عِنْدَکَ وَجیهاً بِالْحُسَیْنِ عَلَیْهِ السَّلامُ فِى الدُّنْیا وَالاْخِرَةِ.</p>
+    <p>یا اَبا عَبْدِاللهِ، اِنّى اَتَقَرَّبُ اِلى اللهِ وَاِلى رَسُولِهِ، وَاِلى اَمیرِالْمُؤْمِنینَ وَاِلى فاطِمَةَ، وَاِلَى الْحَسَنِ وَاِلَیْکَ بِمُوالاتِکَ، وَبِالْبَرآئَةِ مِمَّنْ اَسَسَّ اَساسَ ذلِکَ، وَبَنى عَلَیْهِ بُنْیانَهُ، وَجَرى فى ظُلْمِهِ وَجَوْرِهِ عَلَیْکُمْ، وَعلى اَشْیاعِکُمْ، بَرِئْتُ اِلَى اللهِ وَاِلَیْکُمْ مِنْهُمْ، وَاَتَقَرَّبُ اِلَى اللهِ، ثُمَّ اِلَیْکُمْ بِمُوالاتِکُمْ وَمُوالاةِ وَلِیِّکُمْ، وَبِالْبَرآئَةِ مِنْ اَعْدآئِکُمْ وَالنّاصِبینَ لَکُمُ الْحَرْبَ، وَبِالْبَرآئَةِ مِنْ اَشْیاعِهِمْ وَاَتْباعِهِمْ.</p>
+    <p>اِنّى سِلْمٌ لِمَنْ سالَمَکُمْ، وَحَرْبٌ لِمَنْ حارَبَکُمْ، وَوَلِىٌّ لِمَنْ والاکُمْ، وَعَدُوٌّ لِمَنْ عاداکُمْ، فَاَسْئَلُ اللهَ الَّذى اَکْرَمَنى بِمَعْرِفَتِکُمْ وَمَعْرِفَةِ اَوْلِیآئِکُمْ، وَرَزَقَنِى الْبَرآئَةَ مِنْ اَعْدآئِکُمْ، اَنْ یَجْعَلَنى مَعَکُمْ فِى الدُّنْیا وَالاْخِرَةِ، وَاَنْ یُثَبِّتَ لى عِنْدَکُمْ قَدَمَ صِدْق فِى الدُّنْیا وَالاْخِرَةِ، وَاَسْئَلُهُ اَنْ یُبَلِّغَنِى الْمَقامَ الْمَحْمُودَ لَکُمْ عِنْدَاللهِ، وَ اَنْ یَرْزُقَنى طَلَبَ ثارى مَعَ اِمام هُدىً ظاهِر ناطِق بِالْحَقِّ مِنْکُمْ.</p>
+    <p>وَاَسْئَلُ اللهَ بِحَقِّکُمْ وَبِالشَّاْنِ الَّذى لَکُمْ عِنْدَهُ، اَنْ یُعْطِیَنى بِمُصابى بِکُمْ اَفْضَلَ ما یُعْطى مُصاباً بِمُصیبَتِهِ، مُصیبَةً ما اَعْظَمَها وَاَعْظَمَ رَزِیَّتَها فِى الاِْسْلامِ، وَفى جَمیعِ السَّمواتِ وَالاَْرْضِ.</p>
+    <p>اَللّـهُمَّ اجْعَلْنى فى مَقامى هذا مِمَّنْ تَنالُهُ مِنْکَ صَلَواتٌ وَرَحْمَةٌ وَمَغْفِرَةٌ، اَللّـهُمَّ اجْعَلْ مَحْیاىَ مَحْیا مُحَمَّد وَآلِ مُحَمَّد، وَمَماتى مَماتَ مُحَمَّد وَآلِ مُحَمَّد.</p>
+    <p>اَللّهُمَّ اِنَّ هذا یَوْمٌ تَبَرَّکَتْ بِهِ بَنُو اُمَیَّةَ، وَابْنُ آکِلَةِ الاَْکبادِ، اَللَّعینُ ابْنُ اللَّعینِ، عَلى لِسانِکَ وَلِسانِ نَبِیِّکَ صَلَّى اللهُ عَلَیْهِ وَآلِهِ، فى کُلِّ مَوْطِن وَمَوْقِف وَقَفَ فیهِ نَبِیُّکَ صَلَّى اللهُ عَلَیْهِ وَآلِهِ، اَللّـهُمَّ الْعَنْ اَبا سُفْیانَ وَمُعوِیَةَ وَ یَزیدَ بْنَ مُعاوِیَةَ، عَلَیْهِمْ مِنْکَ اللَّعْنَةُ اَبَدَ الاْبِدینَ.</p>
+    <p>وَهذا یَوْمٌ فَرِحَتْ بِهِ آلُ زِیاد وَآلُ مَرْوانَ بِقَتْلِهِمُ الْحُسَیْنَ صَلَواتُ اللهِ عَلَیْهِ، اَللّـهُمَّ فَضاعِفْ عَلَیْهِمُ اللَّعْنَ مِنْکَ وَالْعَذابَ، اَللّـهُمَّ اِنّى اَتَقَرَّبُ اِلَیْکَ فى هذَا الْیَوْمِ، وَفى مَوْقِفى هذا وَاَیّامِ حَیاتى، بِالْبَرآئَةِ مِنْهُمْ وَاللَّعْنَةِ عَلَیْهِمْ، وَبِالْمُوالاتِ لِنَبِیِّکَ وَ آلِ نَبِیِّکَ عَلَیْهِ وَعَلَیْهِمُ اَلسَّلامُ.</p>
+  `;
+
+  const ZIYARAT_TEXT_D = `
+    <p>اَللّـهُمَّ خُصَّ اَنْتَ اَوَّلَ ظالِم بِاللَّعْنِ مِنّى، وَابْدَأْ بِهِ اَوَّلاً ثُمَّ الثّانِىَ وَالثّالِثَ وَالرّابِعَ، اَللّهُمَّ الْعَنْ یَزیدَ خامِساً، وَالْعَنْ عُبَیْدَ اللهِ بْنَ زِیاد وَابْنَ مَرْجانَةَ وَعُمَرَ بْنَ سَعْد وَشِمْراً، وَآلَ اَبى سُفْیانَ وَ آلَ زِیاد وَ آلَ مَرْوانَ اِلى یَوْمِ الْقِیمَةِ.</p>
+    <p style="text-align:center;color:var(--gold);font-weight:bold;">آنگاه به سجده مى‌روى و مى‌گویى:</p>
+    <p>اَللّهُمَّ لَکَ الْحَمْدُ حَمْدَالشّاکِرینَ لَکَ عَلى مُصابِهِمْ، اَلْحَمْدُ للهِِ عَلى عَظیمِ رَزِیَّتى، اَللّهُمَّ ارْزُقْنى شَفاعَةَ الْحُسَیْنِ یَوْمَ الْوُرُودِ، وَثَبِّتْ لى قَدَمَ صِدْق عِنْدَکَ مَعَ الْحُسَیْنِ وَ اَصْحابِ الْحُسَیْنِ، اَلَّذینَ بَذَلُوا مُهَجَهُمْ دُونَ الْحُسَیْنِ عَلَیْهِ السَّلامُ.</p>
+  `;
+
+  const SALAM_TEXT = "اَلسَّلامُ عَلَیْکَ یا اَباعَبْدِاللهِ وَ عَلَى الاَْرْواحِ الَّتى حَلَّتْ بِفِنائِکَ عَلَیْکَ مِنّى سَلامُ اللهِ اَبَداً ما بَقیتُ وَ بَقِىَ اللَّیْلُ وَ النَّهارُ وَ لاجَعَلَهُ اللهُ آخِرَ الْعَهْدِ مِنّى لِزِیارَتِکُمْ اَلسَّلامُ عَلَى الْحُسَیْنِ وَ عَلى عَلِىِّ بْنِ الْحُسَیْنِ وَ عَلى اَوْلادِ الْحُسَیْنِ وَ عَلى اَصْحابِ الْحُسَیْنِ.";
+  const LAN_TEXT_SHORT = "اَللّهُمَّ الْعَنْ اَوَّلَ ظالِمٍ ظَلَمَ حَقَّ مُحَمَّدٍ وَ آلِ مُحَمَّدٍ وَ آخِرَ تابِعٍ لَهُ عَلى ذلِکَ، اَللّهُمَّ الْعَنِ الْعِصابَةَ الَّتى جاهَدَتِ الْحُسَیْنَ وَ شایَعَتْ وَ بایَعَتْ وَ تابَعَتْ عَلى قَتْلِهِ، اَللّهُمَّ الْعَنْهُمْ جَمیعاً.";
+  const LAN_TEXT_100 = "اَللّهُمَّ الْعَنْ اَوَّلَ ظالِمٍ ظَلَمَ حَقَّ مُحَمَّدٍ وَ آلِ مُحَمَّدٍ وَ آخِرَ تابِعٍ لَهُ عَلى ذلِکَ، اَللّهُمَّ الْعَنِ الْعِصابَةَ الَّتى جاهَدَتِ الْحُسَیْنَ وَ شایَعَتْ وَ بایَعَتْ وَ تابَعَتْ عَلى قَتْلِهِ، اَللّهُمَّ الْعَنْهُمْ جَمیعاً.";
+  const SALAM_TEXT_100 = "اَلسَّلامُ عَلَیْکَ یا اَباعَبْدِاللهِ، وَعَلَى الاَْرْواحِ الَّتى حَلَّتْ بِفِنآئِکَ، عَلَیْکَ مِنّى سَلامُ اللهِ اَبَداً ما بَقیتُ وَبَقِىَ اللَّیْلُ وَالنَّهارُ، وَلا جَعَلَهُ اللهُ آخِرَ الْعَهْدِ مِنّى لِزِیارَتِکُمْ، اَلسَّلامُ عَلَى الْحُسَیْنِ، وَعَلى عَلِىِّ بْنِ الْحُسَیْنِ، وَعَلى اَوْلادِ الْحُسَیْنِ، وَعَلى اَصْحابِ الْحُسَیْنِ.";
+
+  const HAQ_STEPS = [
+    { n: 1, icon: "🕋", title: "۱۰۰ الله اکبر", type: "dhikr", target: 100, dhikrName: "الله اکبر",
+      desc: "۱۰۰ مرتبه «الله اکبر» بگویید." },
+    { n: 2, icon: "🤲", title: "یک سلام و یک لعن", type: "text",
+      desc: "پس از ۱۰۰ الله اکبر، یک بار سلام و یک بار لعن بگویید — بدون خواندن زیارت عاشورا.",
+      texts: [
+        { label: "🌿 یک بار سلام", cls: "salam", body: SALAM_TEXT },
+        { label: "🔥 یک بار لعن", cls: "lan", body: LAN_TEXT_SHORT }
+      ] },
+    { n: 3, icon: "📖", title: "خواندن زیارت تا ابتدای ۱۰۰ لعن", type: "read",
+      desc: "از ابتدای زیارت عاشورا بخوانید تا ابتدای ۱۰۰ لعن.",
+      warn: "⚠️ لعن و سلام گفته نمی‌شود و ادامه زیارت خوانده نمی‌شود.",
+      ziyarat: ZIYARAT_TEXT_A },
+    { n: 4, icon: "🕌", title: "دو رکعت نماز", type: "action",
+      desc: "برمی‌خیزید و دو رکعت نماز هدیه به امام حسین علیه‌السلام می‌خوانید." },
+    { n: 5, icon: "🕋", title: "۱۰۰ الله اکبر (مرحله دوم)", type: "dhikr", target: 100, dhikrName: "الله اکبر",
+      desc: "مجدداً ۱۰۰ مرتبه «الله اکبر» بگویید." },
+    { n: 6, icon: "📖", title: "خواندن زیارت از ابتدا تا ۱۰۰ لعن", type: "read",
+      desc: "از ابتدای زیارت بخوانید تا به ۱۰۰ لعن برسید.",
+      ziyarat: ZIYARAT_TEXT_A },
+    { n: 7, icon: "📿", title: "۱۰۰ لعن", type: "dhikr", target: 100, dhikrName: "لعن",
+      desc: "۱۰۰ مرتبه لعن بگویید.",
+      text: LAN_TEXT_100 },
+    { n: 8, icon: "📿", title: "۱۰۰ سلام", type: "dhikr", target: 100, dhikrName: "سلام",
+      desc: "۱۰۰ مرتبه سلام بگویید.",
+      text: SALAM_TEXT_100 },
+    { n: 9, icon: "📖", title: "ادامه زیارت تا سجده", type: "read",
+      desc: "بعد از سلام، ادامه زیارت را بخوانید تا سجده.",
+      ziyarat: ZIYARAT_TEXT_D },
+    { n: 10, icon: "🕌", title: "دو رکعت نماز زیارت", type: "action",
+      desc: "دو رکعت نماز زیارت امام حسین علیه‌السلام می‌خوانید." }
+  ];
+
+  const haqState = { daysDone: 0, step: 0, dhikrCount: 0 };
+
+  function loadHaqState() {
+    haqState.daysDone   = parseInt(store.get('zy_haq_days', '0'), 10) || 0;
+    haqState.step       = parseInt(store.get('zy_haq_step', '0'), 10) || 0;
+    haqState.dhikrCount = parseInt(store.get('zy_haq_dhikr', '0'), 10) || 0;
+    if (haqState.daysDone < 0) haqState.daysDone = 0;
+    if (haqState.daysDone > HAQ_TOTAL_DAYS) haqState.daysDone = HAQ_TOTAL_DAYS;
+    if (haqState.step < 0 || haqState.step > HAQ_STEPS.length + 1) haqState.step = 0;
+    if (haqState.dhikrCount < 0) haqState.dhikrCount = 0;
+  }
+  function saveHaqState() {
+    store.set('zy_haq_days', haqState.daysDone);
+    store.set('zy_haq_step', haqState.step);
+    store.set('zy_haq_dhikr', haqState.dhikrCount);
+  }
+  function resetHaqState() {
+    haqState.daysDone = 0; haqState.step = 0; haqState.dhikrCount = 0;
+    haqDhikrBump = null;
+    saveHaqState();
+  }
+
+  const elIntro    = document.getElementById('haqIntro');
+  const elDaily    = document.getElementById('haqDaily');
+  const elComplete = document.getElementById('haqComplete');
+  const elStatusTitle = document.getElementById('haqStatusTitle');
+  const elStatusSub   = document.getElementById('haqStatusSub');
+  const elMainBtnText = document.getElementById('haqMainBtnText');
+  const elIntroReset  = document.getElementById('haqIntroReset');
+
+  let haqDhikrBump = null;
+
+  function showIntro() {
+    elIntro.style.display = 'block';
+    elDaily.style.display = 'none';
+    elComplete.style.display = 'none';
+    haqDhikrBump = null;
+    updateIntroContent();
+  }
+  function showDaily() {
+    elIntro.style.display = 'none';
+    elDaily.style.display = 'block';
+    elComplete.style.display = 'none';
+    renderDayHeader();
+    renderStepDots();
+    renderStep();
+  }
+  function showComplete() {
+    elIntro.style.display = 'none';
+    elDaily.style.display = 'none';
+    elComplete.style.display = 'block';
+    haqDhikrBump = null;
+  }
+  function renderHaqView() {
+    if (haqState.daysDone >= HAQ_TOTAL_DAYS) showComplete();
+    else if (haqState.step > 0) showDaily();
+    else showIntro();
+  }
+
+  function updateIntroContent() {
+    const days = haqState.daysDone;
+    const step = haqState.step;
+
+    if (days === 0 && step === 0) {
+      elStatusTitle.textContent = "🌿 آماده برای شروع";
+      elStatusSub.textContent = "چله ۴۰ روزه زیارت عاشورا — بهترین روز برای شروع: چهارشنبه";
+      elMainBtnText.textContent = "🌿 شروع چله — روز ۱";
+      elIntroReset.style.display = 'none';
+    } else if (step > 0) {
+      const currentDay = days + 1;
+      const stepInfo = HAQ_STEPS[step - 1];
+      elStatusTitle.textContent = "🔄 در حال انجام روز " + toFa(currentDay);
+      elStatusSub.textContent = "مرحله " + toFa(step) + " از " + toFa(HAQ_STEPS.length) + " — " + stepInfo.title;
+      elMainBtnText.textContent = "▶ ادامه مرحله " + toFa(step) + " — روز " + toFa(currentDay);
+      elIntroReset.style.display = 'flex';
+    } else if (days > 0 && days < HAQ_TOTAL_DAYS) {
+      const nextDay = days + 1;
+      elStatusTitle.textContent = "✅ روز " + toFa(days) + " با موفقیت ثبت شد";
+      elStatusSub.textContent = "آماده برای شروع روز " + toFa(nextDay) + " از ۴۰";
+      elMainBtnText.textContent = "🌿 شروع روز " + toFa(nextDay);
+      elIntroReset.style.display = 'flex';
+    } else {
+      elStatusTitle.textContent = "🌹 چله کامل شد";
+      elStatusSub.textContent = "قبول باشه إن‌شاءالله";
+      elMainBtnText.textContent = "🌹 مشاهده";
+      elIntroReset.style.display = 'flex';
+    }
+  }
+
+  function renderDayHeader() {
+    const currentDay = haqState.daysDone + 1;
+    const remaining = HAQ_TOTAL_DAYS - haqState.daysDone;
+    document.getElementById('haqDayBig').textContent = 'روز ' + toFa(currentDay);
+    document.getElementById('haqDayRemain').textContent = toFa(remaining) + ' روز مانده';
+    const pct = (haqState.daysDone / HAQ_TOTAL_DAYS) * 100;
+    document.getElementById('haqDayBar').style.width = pct + '%';
+  }
+
+  function renderStepDots() {
+    const cont = document.getElementById('haqStepsDots');
+    let s = '';
+    for (let i = 0; i < HAQ_STEPS.length; i++) {
+      const st = HAQ_STEPS[i];
+      let cls = 'haq-dot';
+      if (haqState.step > st.n) cls += ' done';
+      else if (haqState.step === st.n) cls += ' active';
+      s += '<span class="' + cls + '">' + toFa(st.n) + '</span>';
+    }
+    cont.innerHTML = s;
+  }
+
+  function renderStep() {
+    const view = document.getElementById('haqStepView');
+    haqDhikrBump = null;
+
+    if (haqState.step === HAQ_STEPS.length + 1) { renderFinishDay(); return; }
+    if (haqState.step < 1 || haqState.step > HAQ_STEPS.length) { showIntro(); return; }
+
+    const step = HAQ_STEPS[haqState.step - 1];
+    let h = '';
+
+    h += '<div class="haq-step-hdr"><div class="ico">' + step.icon + '</div><div class="t">' + step.title + '</div></div>';
+    h += '<div class="haq-step-sub">مرحله ' + toFa(step.n) + ' از ' + toFa(HAQ_STEPS.length) + '</div>';
+
+    if (step.desc) {
+      h += '<div class="haq-step-desc">' + step.desc;
+      if (step.warn) h += '<span class="warn">' + step.warn + '</span>';
+      h += '</div>';
+    }
+
+    if (step.texts && step.texts.length) {
+      step.texts.forEach(t => {
+        h += '<div class="haq-step-text ' + (t.cls || '') + '"><span class="lbl">' + t.label + '</span>' + t.body + '</div>';
+      });
+    } else if (step.text) {
+      const cls = step.dhikrName === 'لعن' ? 'lan' : step.dhikrName === 'سلام' ? 'salam' : '';
+      const lbl = step.dhikrName === 'لعن' ? '🔥 متن لعن' : step.dhikrName === 'سلام' ? '🌿 متن سلام' : 'متن';
+      h += '<div class="haq-step-text ' + cls + '"><span class="lbl">' + lbl + '</span>' + step.text + '</div>';
+    }
+
+    if (step.type === 'read' && step.ziyarat) {
+      h += '<div class="haq-inline-text">' + step.ziyarat + '</div>';
+    }
+
+    if (step.type === 'dhikr') {
+      const done = haqState.dhikrCount >= step.target;
+      h += '<div class="haq-dhikr-wrap">';
+      h += '<div class="haq-dhikr-ring ' + (done ? 'complete' : '') + '" id="haqDhikrRing">';
+      h += '<div class="inner">';
+      h += '<div class="num" id="haqDhikrNum">' + toFa(haqState.dhikrCount) + '</div>';
+      h += '<div class="lbl">' + step.dhikrName + '</div>';
+      h += '<div class="sub">از ' + toFa(step.target) + '</div>';
+      h += '</div></div>';
+      h += '<div class="haq-dhikr-actions">';
+      h += '<button class="haq-dhikr-reset" id="haqDhikrReset">';
+      h += '<span class="reset-ico">🗑</span>';
+      h += '<span>صفر کردن شمارنده</span>';
+      h += '</button>';
+      h += '</div>';
+      h += '</div>';
+    }
+
+    h += '<div class="haq-step-actions">';
+    if (step.type === 'dhikr') {
+      const disabled = haqState.dhikrCount < step.target;
+      h += '<button class="haq-next-btn" id="haqNextBtn" ' + (disabled ? 'disabled' : '') + '>' +
+            (disabled ? 'هنوز به عدد ۱۰۰ نرسیدی' : '✅ تکمیل شد — مرحله بعد') + '</button>';
+    } else {
+      h += '<button class="haq-next-btn" id="haqNextBtn">✅ انجام دادم — مرحله بعد</button>';
+    }
+    h += '</div>';
+
+    view.innerHTML = h;
+
+    if (step.type === 'dhikr') bindDhikrEvents(step);
+    document.getElementById('haqNextBtn').addEventListener('click', goNextStep);
+  }
+
+  function bindDhikrEvents(step) {
+    const ring = document.getElementById('haqDhikrRing');
+    const numEl2 = document.getElementById('haqDhikrNum');
+    const resetD = document.getElementById('haqDhikrReset');
+
+    if (haqState.dhikrCount >= step.target) ring.classList.add('complete');
+
+    function doBump() {
+      if (haqState.dhikrCount >= step.target) return;
+      haqState.dhikrCount++;
+      saveHaqState();
+      numEl2.textContent = toFa(haqState.dhikrCount);
+      numEl2.classList.remove('pulse'); void numEl2.offsetWidth; numEl2.classList.add('pulse');
+
+      if (haqState.dhikrCount >= step.target) {
+        ring.classList.add('complete');
+        const nx = document.getElementById('haqNextBtn');
+        if (nx) { nx.disabled = false; nx.textContent = '✅ تکمیل شد — مرحله بعد'; }
+        toast('✅ ' + toFa(step.target) + ' ' + step.dhikrName + ' کامل شد');
+        if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+        if (isInsideBale && BaleApp.HapticFeedback) {
+          try { BaleApp.HapticFeedback.notificationOccurred('success'); } catch(e) {}
+        }
+      } else if (isInsideBale && BaleApp.HapticFeedback) {
+        try { BaleApp.HapticFeedback.impactOccurred('light'); } catch(e) {}
+      }
+    }
+
+    ring.addEventListener('pointerdown', (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+      e.preventDefault();
+      ring.classList.add('tapped');
+      doBump();
+      setTimeout(() => ring.classList.remove('tapped'), 130);
+    });
+
+    haqDhikrBump = doBump;
+
+    resetD.addEventListener('click', async () => {
+      if (haqState.dhikrCount === 0) return;
+      const ok = await showConfirm(
+        'شمارنده ' + step.dhikrName + ' (تعداد فعلی: ' + toFa(haqState.dhikrCount) + ') به صفر برگردد؟'
+      );
+      if (ok) {
+        haqState.dhikrCount = 0;
+        saveHaqState();
+        renderStep();
+      }
+    });
+  }
+
+  function goNextStep() {
+    if (haqState.step >= HAQ_STEPS.length) {
+      haqState.step = HAQ_STEPS.length + 1;
+      haqState.dhikrCount = 0;
+      haqDhikrBump = null;
+      saveHaqState();
+      renderStepDots();
+      renderStep();
+      return;
+    }
+    haqState.step++;
+    haqState.dhikrCount = 0;
+    saveHaqState();
+    renderStepDots();
+    renderStep();
+  }
+
+  function renderFinishDay() {
+    const view = document.getElementById('haqStepView');
+    const currentDay = haqState.daysDone + 1;
+    view.innerHTML =
+      '<div class="haq-finish">' +
+        '<div class="big-ico">✨🕌✨</div>' +
+        '<h3>مراحل روز ' + toFa(currentDay) + ' تکمیل شد</h3>' +
+        '<p>اگر همه مراحل را انجام داده‌اید،<br>روز ' + toFa(currentDay) + ' چله را ثبت کنید.</p>' +
+        '<button class="haq-next-btn" id="haqFinishBtn">📌 ثبت انجام روز ' + toFa(currentDay) + '</button>' +
+      '</div>';
+
+    document.getElementById('haqFinishBtn').addEventListener('click', () => {
+      haqState.daysDone++;
+      haqState.step = 0;
+      haqState.dhikrCount = 0;
+      haqDhikrBump = null;
+      saveHaqState();
+
+      if (haqState.daysDone >= HAQ_TOTAL_DAYS) {
+        showComplete();
+        toast('🌹 چله ۴۰ روزه کامل شد!');
+      } else {
+        toast('✅ روز ' + toFa(haqState.daysDone) + ' ثبت شد');
+        showIntro();
+      }
+    });
+  }
+
+  document.getElementById('haqMainBtn').addEventListener('click', () => {
+    if (haqState.daysDone >= HAQ_TOTAL_DAYS) { showComplete(); return; }
+    if (haqState.step > 0 && haqState.step <= HAQ_STEPS.length + 1) { showDaily(); return; }
+    haqState.step = 1;
+    haqState.dhikrCount = 0;
+    saveHaqState();
+    showDaily();
+    toast('🌿 روز ' + toFa(haqState.daysDone + 1) + ' شروع شد');
+  });
+
+  document.getElementById('haqViewIntroBtn').addEventListener('click', showIntro);
+  document.getElementById('haqViewIntroFromComplete').addEventListener('click', showIntro);
+
+  async function handleReset() {
+    if (haqState.daysDone === 0 && haqState.step === 0) {
+      toast('الان چیزی برای صفر کردن نیست');
+      return;
+    }
+    const ok = await showConfirm(
+      '⚠️ هشدار!\n\n' +
+      'آیا مطمئن هستید که می‌خواهید روزهای چله را صفر کنید؟\n\n' +
+      'با این کار:\n' +
+      '• تمام روزهای ثبت‌شده از بین می‌رود\n' +
+      '• پیشرفت در حال انجام پاک می‌شود\n' +
+      '• باید از روز اول شروع کنید\n\n' +
+      'این عمل قابل بازگشت نیست!'
+    );
+    if (ok) {
+      resetHaqState();
+      showIntro();
+      toast('روزهای چله صفر شد');
+    }
+  }
+  document.getElementById('haqResetBtnIntro').addEventListener('click', handleReset);
+  document.getElementById('haqResetBtnDaily').addEventListener('click', handleReset);
+  document.getElementById('haqResetBtnComplete').addEventListener('click', handleReset);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code !== 'Space') return;
+    const tag = (e.target.tagName || '').toUpperCase();
+    if (tag === 'INPUT' || tag === 'BUTTON' || tag === 'TEXTAREA' || tag === 'A' || tag === 'SELECT') return;
+
+    if (document.getElementById('tab-salavat').classList.contains('active')) {
+      e.preventDefault();
+      bumpSalavat();
+      return;
+    }
+    if (document.getElementById('tab-haq').classList.contains('active') && typeof haqDhikrBump === 'function') {
+      e.preventDefault();
+      haqDhikrBump();
+    }
+  });
+
+  loadHaqState();
+  showHintIfFirstTime();
+
+  window.addEventListener('beforeunload', () => {
+    saveHaqState();
+    saveSalavat();
+  });
+
+})();
+</script>
+
+</body>
+</html>
